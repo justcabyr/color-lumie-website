@@ -1,0 +1,53 @@
+name: GitHub Action PR Creation
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - develop
+
+jobs:
+  ai-pr-creator:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Check for existing open PRs
+        id: check-prs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: ${{ github.ref_name }}
+        run: |
+          # Check if there's an existing open PR for this branch
+          EXISTING_PR=$(gh pr list --head "$BRANCH_NAME" --state open --json number --jq length)
+          echo "existing_pr_count=$EXISTING_PR" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.check-prs.outputs.existing_pr_count == 0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get the latest commit message
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          BRANCH_NAME="${{ github.ref_name }}"
+
+          # Create pull request to develop branch
+          gh pr create \
+            --base develop \
+            --head "$BRANCH_NAME" \
+            --title "$COMMIT_MESSAGE" \
+            --body "Automated PR from branch: $BRANCH_NAME
+
+          Original Commit Message:
+          $COMMIT_MESSAGE"
