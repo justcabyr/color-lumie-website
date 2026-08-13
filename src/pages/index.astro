@@ -1,10 +1,154 @@
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Hello</title>
-	</head>
-	<body>
-		hello
-	</body>
-</html>
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar.astro';
+
+const screenshotFiles = [
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 06.59.01.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 06.59.09.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 06.59.27.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 06.59.36.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 06.59.49.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.00.00.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.01.00.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.03.01.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.03.08.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.03.13.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.03.16.png',
+  'Simulator Screenshot - iPhone 17 Pro Max - 2026-04-21 at 07.03.24.png',
+];
+const screenshots = screenshotFiles.map(
+  (name) => `/color-lumie/${encodeURIComponent(name)}`
+);
+const appStoreUrl = 'https://apps.apple.com/us/app/color-lumie/id6760363446';
+---
+
+<Layout>
+  <NavBar />
+  <header class="mb-10 text-center sm:text-left">
+    <h1 class="mb-2 font-serif text-5xl font-bold">Color Lumie</h1>
+    <p class="mb-6 text-xl font-medium text-gray-800">Share Your Light</p>
+    <p class="mb-8">
+      <a
+        href={appStoreUrl}
+        class="inline-flex items-center justify-center rounded-full bg-[#1a1a1a] px-6 py-3 text-base font-medium text-[#f9f7f1] no-underline transition hover:bg-gray-800"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Download on the App Store
+      </a>
+    </p>
+  </header>
+
+  <section aria-label="App screenshots" class="mb-12 -mx-6 px-6">
+    <div
+      class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 [scrollbar-width:thin]"
+    >
+      {
+        screenshots.map((src, i) => (
+          <figure class="m-0 shrink-0 snap-center first:pl-0 last:pr-0">
+            <img
+              src={src}
+              alt={`Color Lumie screenshot ${i + 1} of ${screenshots.length}`}
+              width={430}
+              height={932}
+              loading={i < 2 ? 'eager' : 'lazy'}
+              decoding="async"
+              class="max-h-[min(70vh,560px)] w-auto rounded-[2rem] border border-black/5 shadow-lg shadow-black/10"
+            />
+          </figure>
+        ))
+      }
+    </div>
+    <p class="mt-1 text-center text-sm text-gray-500 sm:text-left">
+      Swipe left/right to browse screenshots
+    </p>
+  </section>
+
+  <div class="space-y-8 text-lg leading-relaxed">
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold">About</h2>
+      <p>
+        Color Lumie is a private space for you and your closest friends to stay
+        connected through color. We often don&apos;t have the words to say how
+        we&apos;re feeling, but we always know our &quot;vibe.&quot;
+      </p>
+      <p>
+        No endless scrolling, no public profiles, and no pressure to perform.
+        Just a simple, beautiful way to see who&apos;s feeling radiant, who&apos;s
+        feeling quiet, and who might need a little extra warmth today. Set your
+        Lumie, share your light, and keep your inner circle close.
+      </p>
+    </section>
+
+    <section class="space-y-3">
+      <blockquote
+        class="border-l-4 border-orange-500 pl-4 italic text-gray-800"
+      >
+        Stop scrolling, start feeling. Share your daily &apos;vibe&apos; with
+        your inner circle through color. A private, quiet space for the people
+        who matter most. What&apos;s your Lumie?
+      </blockquote>
+    </section>
+
+    <section class="space-y-6">
+      <div class="space-y-3">
+        <h3 class="text-xl font-semibold">Experience Social Symmetry</h3>
+        <p>
+          Color Lumie isn&apos;t another social network; it&apos;s an emotional
+          synchronization tool. We use a unique &quot;orderless&quot; graph
+          architecture to ensure your connections are private, mutual, and
+          secure.
+        </p>
+      </div>
+
+      <div class="space-y-3">
+        <h3 class="text-xl font-semibold">Why Color Lumie?</h3>
+        <p>
+          Because friendship isn&apos;t about likes or comments; it&apos;s about
+          being seen. Color Lumie helps you identify which friend needs a coffee,
+          which one needs a celebration, and which one just needs some space—all
+          at a single glance.
+        </p>
+      </div>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold">Legal</h2>
+      <p>
+        You can review Color Lumie&apos;s legal documents using the links below.
+      </p>
+      <ul class="list-disc space-y-2 pl-6 text-base">
+        <li>
+          <a href="/privacy" class="text-orange-600 hover:underline">
+            Privacy Policy
+          </a>
+        </li>
+        <li>
+          <a href="/terms" class="text-orange-600 hover:underline">
+            Terms of Service
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="space-y-3">
+      <h2 class="text-2xl font-bold">Support</h2>
+      <p>
+        Need help using Color Lumie? Have feedback or run into an issue? I&apos;m
+        happy to hear from you.
+      </p>
+      <p>
+        📧
+        {' '}
+        Email me at
+        {' '}
+        <a
+          href="mailto:justcabyr@gmail.com"
+          class="text-orange-600 hover:underline"
+        >
+          justcabyr@gmail.com
+        </a>
+      </p>
+    </section>
+  </div>
+</Layout>
