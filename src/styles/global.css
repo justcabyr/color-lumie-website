@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+.markdown-content {
+  display: grid;
+  gap: 1rem;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.markdown-content h1 {
+  font-size: 2rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.5rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.25rem;
+}
+
+.markdown-content p {
+  margin: 0;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.markdown-content ul {
+  list-style: disc;
+}
+
+.markdown-content ol {
+  list-style: decimal;
+}
+
+.markdown-content blockquote {
+  margin: 0;
+  border-left: 3px solid #d7cdbd;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #3f3f3f;
+}
+
+.markdown-content a {
+  color: #ea580c;
+  text-decoration: underline;
+}
+
+.markdown-content code {
+  border-radius: 0.375rem;
+  background: #efe8db;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.9em;
+}
+
+.markdown-content hr {
+  border: 0;
+  border-top: 1px solid #e7e1d6;
+}
