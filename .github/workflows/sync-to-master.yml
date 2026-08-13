@@ -1,4 +1,4 @@
-name: Auto PR from Develop to Main
+name: Auto PR from Develop to Master
 
 permissions:
   contents: write
@@ -22,12 +22,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check for existing develop to main PR
-        id: check-main-pr
+      - name: Check for existing develop to master PR
+        id: check-master-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          EXISTING_PR=$(gh pr list --head develop --base main --state open --json number --jq length)
+          EXISTING_PR=$(gh pr list --head develop --base master --state open --json number --jq length)
           echo "existing_pr_count=$EXISTING_PR" >> $GITHUB_OUTPUT
 
       - name: Create labels if they don't exist
@@ -35,16 +35,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh label create "automated pr" --color "#0E8A16" --description "PR created by GitHub Actions" || true
-          gh label create "sync to main" --color "#FFA500" --description "PR to sync develop with main" || true
+          gh label create "sync to master" --color "#FFA500" --description "PR to sync develop with master" || true
 
-      - name: Create PR to main
-        if: steps.check-main-pr.outputs.existing_pr_count == 0
+      - name: Create PR to master
+        if: steps.check-master-pr.outputs.existing_pr_count == 0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create \
-            --base main \
+            --base master \
             --head develop \
-            --title "chore: sync develop to main" \
-            --body "Automated PR to sync develop branch with main branch" \
-            --label "automated pr" --label "sync to main"
+            --title "chore: sync develop to master" \
+            --body "Automated PR to sync develop branch with master branch" \
+            --label "automated pr" --label "sync to master"
