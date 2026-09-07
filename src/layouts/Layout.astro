@@ -21,9 +21,31 @@ const bodyDefault = 'bg-[#f9f7f1] text-[#1a1a1a]';
     <title>{title}</title>
   </head>
   <body class:list={['font-sans', bodyClass ?? bodyDefault]}>
-    <main class="max-w-3xl mx-auto px-6 py-10">
+    <main class="mx-auto max-w-3xl px-6 py-10 pb-24">
       <slot />
     </main>
+    <footer
+      class="fixed bottom-0 left-0 right-0 bg-[#f9f7f1] py-4 text-center text-sm text-gray-500"
+    >
+      <nav class="space-x-6">
+        <a
+          href="https://www.linkedin.com/company/color-lumie/"
+          class="hover:text-orange-600 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+        <a
+          href="https://github.com/justcabyr/color-lumie"
+          class="hover:text-orange-600 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GitHub
+        </a>
+      </nav>
+    </footer>
   </body>
 </html>
 
